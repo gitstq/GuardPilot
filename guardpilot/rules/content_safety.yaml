@@ -1,0 +1,82 @@
+# Content Safety Rules / 内容安全规则
+# These rules ensure agent responses do not contain harmful content.
+# 这些规则确保 Agent 响应不包含有害内容。
+
+rules:
+  - id: cs-no-violence
+    name: No Violence / 禁止暴力内容
+    description: Agent must not generate content that promotes or depicts violence.
+    category: content_safety
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: kill
+        negate: true
+      - type: keyword
+        value: murder
+        negate: true
+      - type: keyword
+        value: attack
+        negate: true
+
+  - id: cs-no-self-harm
+    name: No Self-Harm / 禁止自残内容
+    description: Agent must not generate content that encourages self-harm or suicide.
+    category: content_safety
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: suicide
+        negate: true
+      - type: keyword
+        value: self-harm
+        negate: true
+
+  - id: cs-no-hate-speech
+    name: No Hate Speech / 禁止仇恨言论
+    description: Agent must not generate content that promotes discrimination or hate.
+    category: content_safety
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: hate
+        negate: true
+      - type: keyword
+        value:歧视
+        negate: true
+
+  - id: cs-no-pii
+    name: No PII Leakage / 禁止泄露个人信息
+    description: Agent must not expose personally identifiable information.
+    category: content_safety
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: regex
+        value: "\\b\\d{3}-\\d{2}-\\d{4}\\b"
+        negate: true
+      - type: regex
+        value: "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b"
+        negate: true
+
+  - id: cs-no-illegal
+    name: No Illegal Activities / 禁止违法活动
+    description: Agent must not provide instructions for illegal activities.
+    category: content_safety
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: drug
+        negate: true
+      - type: keyword
+        value: smuggle
+        negate: true

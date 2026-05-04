@@ -1,0 +1,94 @@
+# Domain Compliance Rules / 领域合规规则
+# These rules ensure domain-specific compliance for financial, medical, and legal advice.
+# 这些规则确保金融、医疗和法律建议的领域特定合规性。
+
+rules:
+  # Financial compliance / 金融合规
+  - id: dc-financial-disclaimer
+    name: Financial Disclaimer / 金融免责声明
+    description: Financial advice must include appropriate disclaimers.
+    category: domain_compliance
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: disclaimer
+      - type: keyword
+        value: 免责声明
+
+  - id: dc-no-stock-tips
+    name: No Stock Tips / 禁止荐股
+    description: Agent must not provide specific stock purchase recommendations.
+    category: domain_compliance
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: buy now
+        negate: true
+      - type: keyword
+        value: guaranteed return
+        negate: true
+      - type: keyword
+        value: 稳赚
+        negate: true
+
+  # Medical compliance / 医疗合规
+  - id: dc-medical-disclaimer
+    name: Medical Disclaimer / 医疗免责声明
+    description: Medical advice must recommend consulting a healthcare professional.
+    category: domain_compliance
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: consult
+      - type: keyword
+        value: 就医
+
+  - id: dc-no-prescription
+    name: No Prescriptions / 禁止开处方
+    description: Agent must not prescribe medications or treatments.
+    category: domain_compliance
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: take this medication
+        negate: true
+      - type: keyword
+        value: 服用
+        negate: true
+
+  # Legal compliance / 法律合规
+  - id: dc-legal-disclaimer
+    name: Legal Disclaimer / 法律免责声明
+    description: Legal advice must recommend consulting a qualified attorney.
+    category: domain_compliance
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: attorney
+      - type: keyword
+        value: 律师
+
+  - id: dc-no-legal-advice
+    name: No Legal Advice / 禁止提供法律建议
+    description: Agent must not provide specific legal advice or strategies.
+    category: domain_compliance
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: you should sue
+        negate: true
+      - type: keyword
+        value: 起诉
+        negate: true

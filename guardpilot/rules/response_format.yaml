@@ -1,0 +1,52 @@
+# Response Format Rules / 响应格式规则
+# These rules ensure agent responses follow expected formatting guidelines.
+# 这些规则确保 Agent 响应遵循预期的格式指南。
+
+rules:
+  - id: rf-max-length
+    name: Max Response Length / 最大响应长度
+    description: Agent responses should not exceed 2000 characters.
+    category: response_format
+    priority: medium
+    severity: warn
+    enabled: true
+    conditions:
+      - type: length
+        value: 2000
+        negate: true
+
+  - id: rf-min-length
+    name: Min Response Length / 最小响应长度
+    description: Agent responses should be at least 10 characters to be meaningful.
+    category: response_format
+    priority: low
+    severity: log
+    enabled: true
+    conditions:
+      - type: custom
+        value: "ends_with:punctuation"
+
+  - id: rf-no-empty
+    name: No Empty Response / 禁止空响应
+    description: Agent must not return empty or whitespace-only responses.
+    category: response_format
+    priority: high
+    severity: block
+    enabled: true
+    conditions:
+      - type: keyword
+        value: "placeholder_non_empty_check"
+        negate: false
+
+  - id: rf-structured-output
+    name: Structured Output / 结构化输出
+    description: When requested, agent should provide structured output with clear sections.
+    category: response_format
+    priority: medium
+    severity: log
+    enabled: true
+    conditions:
+      - type: keyword
+        value: summary
+      - type: keyword
+        value: details

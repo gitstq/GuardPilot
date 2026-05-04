@@ -1,0 +1,76 @@
+# Tone and Style Rules / 语气风格规则
+# These rules ensure agent responses maintain appropriate tone and style.
+# 这些规则确保 Agent 响应保持适当的语气和风格。
+
+rules:
+  - id: ts-professional-language
+    name: Professional Language / 专业语言
+    description: Agent should use professional language, avoiding slang and informal expressions.
+    category: tone_style
+    priority: medium
+    severity: warn
+    enabled: true
+    conditions:
+      - type: keyword
+        value: lol
+        negate: true
+      - type: keyword
+        value: omg
+        negate: true
+      - type: keyword
+        value: bruh
+        negate: true
+      - type: keyword
+        value: 哈哈哈
+        negate: true
+
+  - id: ts-no-sarcasm
+    name: No Sarcasm / 避免讽刺
+    description: Agent should avoid sarcastic or passive-aggressive responses.
+    category: tone_style
+    priority: medium
+    severity: warn
+    enabled: true
+    conditions:
+      - type: keyword
+        value: obviously
+        negate: true
+      - type: keyword
+        value: whatever
+        negate: true
+
+  - id: ts-respectful-tone
+    name: Respectful Tone / 尊重语气
+    description: Agent should maintain a respectful and helpful tone.
+    category: tone_style
+    priority: medium
+    severity: log
+    enabled: true
+    conditions:
+      - type: keyword
+        value: please
+      - type: keyword
+        value: thank
+
+  - id: ts-no-all-caps
+    name: No Excessive All-Caps / 避免全大写
+    description: Agent should not use excessive all-caps text which appears as shouting.
+    category: tone_style
+    priority: low
+    severity: log
+    enabled: true
+    conditions:
+      - type: regex
+        value: "[A-Z]{10,}"
+        negate: true
+
+  - id: ts-clear-language
+    name: Clear Language / 清晰表达
+    description: Agent should use clear, concise language without unnecessary complexity.
+    category: tone_style
+    priority: low
+    severity: log
+    enabled: true
+    conditions:
+      - type: keyword
+        value: in other words
